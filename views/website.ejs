@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBA REAL ESTATE | Find Your Dream Property</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #1e3a8a;
+            --accent: #e11d48;
+            --light: #f8fafc;
+            --dark: #1e293b;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c508aef0-e613-4cce-bfc0-4b16690c06f3.png') no-repeat center center;
+            background-size: cover;
+            height: 90vh;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .input-highlight:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(30, 64, 175, 0.1);
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        
+        .dropdown-icon {
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .dropdown-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center"> <!-- Left side: Logo + Nav Links -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold text-xl">IB</div>
+                        <span class="ml-2 text-xl font-semibold text-blue-800">IBA REAL ESTATE</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8 ml-6"> <!-- Nav Links + Dropdown -->
+                        <a href="/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="#properties" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Properties</a>
+                        <a href="#agents" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Agents</a>
+                        <a href="#about" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                        <a href="#contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
+                        
+                        <!-- Professional Service Dropdown -->
+                        <div class="admin-dropdown relative inline-block">
+                            <button id="service-toggle" class="dropdown-toggle flex items-center px-1 pt-1 border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" aria-expanded="false" aria-controls="service-menu">
+                                <i class="fas fa-tools text-base mr-1" aria-hidden="true"></i>Services
+                                <i class="fas fa-chevron-down dropdown-icon text-sm ml-1"></i>
+                            </button>
+                            <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50" id="service-menu" role="menu" aria-labelledby="service-toggle">
+                                <!--<a href="costumer-sell-page.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center transition duration-150" role="menuitem" tabindex="-1" aria-label="Sell Properties">
+                                    <i class="fas fa-tag text-base mr-3" aria-hidden="true"></i>Sell
+                                </a>-->
+                                <a href="/customer-buy-page.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center transition duration-150" role="menuitem" tabindex="-1" aria-label="Buy Properties">
+                                    <i class="fas fa-shopping-cart text-base mr-3" aria-hidden="true"></i>Buy
+                                </a>
+                                <a href="/customer-rent-page.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center transition duration-150" role="menuitem" tabindex="-1" aria-label="Rent Properties">
+                                    <i class="fas fa-key text-base mr-3" aria-hidden="true"></i>Rent
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right side: Login Button (Desktop) -->
+                <div class="hidden sm:flex sm:items-center">
+                     <a href="login"><button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-md text-white font-medium transition duration-300">Login / Register</button></a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="index.html" class="bg-gray-50 border-blue-500 text-blue-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="#properties" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Properties</a>
+                <a href="#agents" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Agents</a>
+                <a href="#about" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+                <a href="#contact" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+                
+                <!-- Mobile Services Section (Simple List) -->
+                <div class="border-l-4 border-transparent text-gray-500 hover:bg-gray-50 pl-3 pr-4 py-2">
+                    <details class="text-base font-medium">
+                        <summary class="cursor-pointer flex items-center justify-between">
+                            <span>Services</span>
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </summary>
+                        <ul class="mt-2 ml-4 space-y-1 text-sm">
+                            <!--<li><a href="sell-page.html" class="block text-gray-600 hover:text-blue-700 py-1">Sell</a></li>-->
+                            <li><a href="/customer-buy-page.html" class="block text-gray-600 hover:text-blue-700 py-1">Buy</a></li>
+                            <li><a href="/customer-rent-page.html" class="block text-gray-600 hover:text-blue-700 py-1">Rent</a></li>
+                        </ul>
+                    </details>
+                </div>
+                
+                
+                <div class="mt-4 px-4">
+               <a href="login"><button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-md text-white font-medium transition duration-300">Login / Register</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section flex items-center justify-center text-white relative">
+        <div class="text-center px-4 sm:px-6 lg:px-8 max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Find Your Dream Home Today</h1>
+            <p class="text-lg sm:text-xl mb-8">Discover the perfect property for your lifestyle from our curated collection of luxury homes and commercial spaces.</p>
+            
+            <!-- Search Form -->
+            <form id="search-form" class="bg-white rounded-lg shadow-xl p-4 md:p-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="location" class="sr-only">Location</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                            </div>
+                            <input type="text" id="location" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md input-highlight" placeholder="City, Neighborhood, ZIP">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="property-type" class="sr-only">Property Type</label>
+                        <select id="property-type" class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-md input-highlight">
+                            <option value="">All Types</option>
+                            <option>1 room self contain</option>
+                            <option>2 rooms self contain</option>
+                            <option>single room</option>
+                            <option>plot of land</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 px-4 rounded-md transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-search mr-2"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center">
+            <a href="#properties" class="animate-bounce bg-white text-blue-800 rounded-full p-2 shadow-lg">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section id="properties" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Properties</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our handpicked selection of premium properties that match your lifestyle and aspirations.</p>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button class="px-4 py-2 border-b-2 border-blue-500 text-blue-700 font-medium">All</button>
+                   <!-- <button class="px-4 py-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 font-medium">Houses</button>
+                    <button class="px-4 py-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 font-medium">Apartments</button>
+                    <button class="px-4 py-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 font-medium">Land</button>-->
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property 1 -->
+                 <% card.forEach(card => { %> 
+                <!-- Property 2: Urban Chic Loft (Self Contain) -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md property-card transition duration-300" data-type="duplex">
+                    <div class="relative">
+                        <img src="<%= card.image_data %>" alt="Contemporary urban loft with exposed brick walls and industrial chic design" class="w-full h-48 object-cover" />
+                        <div class="absolute bottom-4 left-4 bg-white/80 text-gray-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-700 mr-1"></i> <%= card.propertyAddress %>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2"><%= card.title %></h3>
+                        <p class="text-gray-600 mb-4"><%= card.propertyAddress %></p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-blue-700 font-bold text-xl"><%= card.amount %></span>
+                            </div>
+                            <div class="flex space-x-2 text-gray-500">
+                                <span class="flex items-center">
+                                    <i class="fas fa-bed mr-1 text-blue-700"></i> <%= card.bedrooms %>
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-bath mr-1 text-blue-700"></i> <%= card.bathrooms %>
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-ruler-combined mr-1 text-blue-700"></i> <%= card.sqft %>sqft
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <a href="property-detail?id=<%= card.id %>" class="block mt-4 bg-blue-700 hover:bg-blue-800 text-white py-2 rounded-md text-center transition duration-300 requires-login">View Details</a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="/customer-buy-page.html"><button class="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-medium transition duration-300 requires-login">
+                    View All Properties
+                </button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose IBA REAL ESTATE</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">We combine local expertise with global connections to deliver exceptional results.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="flex justify-center mb-4">
+                        <div class="feature-icon rounded-full flex items-center justify-center text-blue-700">
+                            <i class="fas fa-hand-holding-usd text-3xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Best Prices</h3>
+                    <p class="text-gray-600">Our extensive market research ensures you get the best value for your investment.</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="flex justify-center mb-4">
+                        <div class="feature-icon rounded-full flex items-center justify-center text-blue-700">
+                            <i class="fas fa-user-shield text-3xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Trusted Agents</h3>
+                    <p class="text-gray-600">Our team of certified experts provides guidance through every step of the process.</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="flex justify-center mb-4">
+                        <div class="feature-icon rounded-full flex items-center justify-center text-blue-700">
+                            <i class="fas fa-home text-3xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Premium Properties</h3>
+                    <p class="text-gray-600">Carefully curated selection of high-quality homes and commercial spaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Agents -->
+    <section id="agents" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Agents</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Our experienced professionals are ready to help you find your perfect property.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Agent 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md text-center p-6 transition duration-300 hover:-translate-y-2">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-blue-100 mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/232d064f-e8c9-4302-acd3-efe9b2dbd04a.png" alt="Portrait of Sarah Johnson, professional real estate agent in grey suit" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Sarah Johnson</h3>
+                    <p class="text-blue-700 font-medium mb-4">Senior Agent</p>
+                    <div class="flex justify-center space-x-3 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500 mb-1">
+                        <i class="fas fa-phone-alt mr-2"></i> (555) 123-4567
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500">
+                        <i class="fas fa-envelope mr-2"></i> sarah@ibarealestate.com
+                    </div>
+                </div>
+                
+                <!-- Agent 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md text-center p-6 transition duration-300 hover:-translate-y-2">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-blue-100 mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cb53ef20-b748-4003-ba1a-89a7640bc6fe.png" alt="Portrait of Michael Chen, professional real estate agent in navy blue blazer" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Michael Chen</h3>
+                    <p class="text-blue-700 font-medium mb-4">Luxury Specialist</p>
+                    <div class="flex justify-center space-x-3 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500 mb-1">
+                        <i class="fas fa-phone-alt mr-2"></i> (555) 234-5678
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500">
+                        <i class="fas fa-envelope mr-2"></i> michael@ibarealestate.com
+                    </div>
+                </div>
+                
+                <!-- Agent 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md text-center p-6 transition duration-300 hover:-translate-y-2">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-blue-100 mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3ab1cb90-097d-4607-9937-1d51d72b40f0.png" alt="Portrait of David Wilson, professional real estate agent with friendly smile" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">David Wilson</h3>
+                    <p class="text-blue-700 font-medium mb-4">Commercial Expert</p>
+                    <div class="flex justify-center space-x-3 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500 mb-1">
+                        <i class="fas fa-phone-alt mr-2"></i> (555) 345-6789
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500">
+                        <i class="fas fa-envelope mr-2"></i> david@ibarealestate.com
+                    </div>
+                </div>
+                
+                <!-- Agent 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md text-center p-6 transition duration-300 hover:-translate-y-2">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-blue-100 mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/670ab1b4-4d17-48bb-a6d2-d7245b269762.png" alt="Portrait of Maria Rodriguez, professional real estate agent in elegant professional attire" class="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Maria Rodriguez</h3>
+                    <p class="text-blue-700 font-medium mb-4">First-Time Buyers</p>
+                    <div class="flex justify-center space-x-3 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-700">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500 mb-1">
+                        <i class="fas fa-phone-alt mr-2"></i> (555) 456-7890
+                    </div>
+                    <div class="flex items-center justify-center text-gray-500">
+                        <i class="fas fa-envelope mr-2"></i> maria@ibarealestate.com
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">What Our Clients Say</h2>
+                <p class="text-blue-200 max-w-2xl mx-auto">Hear from our satisfied clients about their experiences with IBA REAL ESTATE.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc9b98f0-8b49-4d32-92ea-72f47ea75ffa.png" alt="Portrait of John Smith, satisfied client" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">John Smith</h4>
+                            <p class="text-gray-600 text-sm">Los Angeles, CA</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">
+                        "The team at IBA REAL ESTATE made our home buying experience seamless. Their attention to detail and market knowledge helped us find our dream home quickly."
+                    </p>
+                    <div class="mt-3 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1f7faa1e-afa3-4049-bdb4-239cea56275e.png" alt="Portrait of Emily Wilson, satisfied client" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Emily Wilson</h4>
+                            <p class="text-gray-600 text-sm">New York, NY</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">
+                        "As first-time buyers, we were nervous about the process, but Maria guided us through every step with patience and professionalism."
+                    </p>
+                    <div class="mt-3 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/065cf81f-4acb-44c7-93be-20ec46b18069.png" alt="Portrait of Robert Chen, satisfied client" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Robert Chen</h4>
+                            <p class="text-gray-600 text-sm">San Francisco, CA</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">
+                        "We got 20% above asking price thanks to their marketing strategy and negotiation skills. Couldn't be happier with the service!"
+                    </p>
+                    <div class="mt-3 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-10">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ae41ddc8-717f-4b71-a131-d22752608cdc.png" alt="Team of professional real estate agents collaborating in modern office environment" class="rounded-lg shadow-lg w-full" loading="lazy" />
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">About IBA REAL ESTATE</h2>
+                    <p class="text-gray-600 mb-4">
+                        Founded in 2023, IBA REAL ESTATE has grown from a small local office to a leading real estate brokerage with offices in major cities across the country. Our mission is to provide exceptional service by combining deep local market knowledge with innovative technology.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        We believe buying or selling property should be an enjoyable, rewarding experience. That's why we invest heavily in training our agents and developing proprietary tools to give our clients an advantage in today's competitive market.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-home text-blue-700"></i>
+                            </div>
+                            <span class="font-medium text-gray-900">500+</span>
+                            <span class="text-gray-600 ml-1">Properties Sold</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-city text-blue-700"></i>
+                            </div>
+                            <span class="font-medium text-gray-900">12</span>
+                            <span class="text-gray-600 ml-1">Cities</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-users text-blue-700"></i>
+                            </div>
+                            <span class="font-medium text-gray-900">25</span>
+                            <span class="text-gray-600 ml-1">Agents</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-trophy text-blue-700"></i>
+                            </div>
+                            <span class="font-medium text-gray-900">25</span>
+                            <span class="text-gray-600 ml-1">Awards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-100">
+       <!--<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Stay Updated</h2>
+            <p class="text-lg text-gray-600 mb-8">Subscribe to our newsletter for market updates, new listings, and real estate tips.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" id="newsletter-email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                <button type="submit" class="bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-lg text-white font-medium transition duration-300 whitespace-nowrap">
+                    Subscribe Now
+                </button>
+            </form>
+            
+            <p class="text-sm text-gray-500 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+        </div>-->
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Contact Us</h2>
+                    <p class="text-gray-600 mb-8">
+                        Have questions or ready to start your property search? Our team is here to help. Fill out the form or contact us directly using the information below.
+                    </p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Main Office</h3>
+                                <p class="text-gray-600">123 Property Lane, Suite 200<br>Lagos, Nigeria</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-phone-alt text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Phone Number</h3>
+                                <p class="text-gray-600">+234 800 123 4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-blue-700"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-1">Email Address</h3>
+                                <p class="text-gray-600">info@ibarealestate.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-700 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-700 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-700 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center hover:bg-blue-700 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <form id="contact-form" class="bg-gray-50 rounded-xl p-6 sm:p-8 shadow-sm" action="contact" method="post">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" class="block w-full px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Smith" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" class="block w-full px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="you@example.com" required>
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="block w-full px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+234 800 123 4567" required>
+                            </div>
+                            
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                <select id="subject" name="subject" class="block w-full px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select a subject</option>
+                                    <option>General Inquiry</option>
+                                    <option>Property Listing</option>
+                                    <option>Schedule a Viewing</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" class="block w-full px-4 py-3 rounded-lg border border-gray-300 input-highlight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message..." required></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-lg text-white font-medium transition duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-full bg-blue-700 flex items-center justify-center text-white font-bold text-xl">IB</div>
+                        <span class="ml-2 text-xl font-semibold">IBA REAL ESTATE</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Your trusted partner in real estate for over 15 years. We connect people with properties that elevate their lives.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="properties.html" class="text-gray-400 hover:text-white">Properties</a></li>
+                        <li><a href="#agents" class="text-gray-400 hover:text-white">Agents</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/customer-buy-page.html" class="text-gray-400 hover:text-white">Buying</a></li>
+                        <!--<li><a href="sell-page.html" class="text-gray-400 hover:text-white">Selling</a></li>-->
+                        <li><a href="/customer-rent-page.html" class="text-gray-400 hover:text-white">Renting</a></li>
+                        <!--<li><a href="#" class="text-gray-400 hover:text-white">Property Management</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Commercial Real Estate</a></li>-->
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <address class="not-italic text-gray-400">
+                        <p class="mb-2">123 Property Lane, Suite 200</p>
+                        <p class="mb-2">Lagos, Nigeria</p>
+                        <p class="mb-2">Phone: +234 800 123 4567</p>
+                        <p class="mb-2">Email: info@ibarealestate.com</p>
+                        <p class="mb-2">Hours: Mon-Fri 9am-6pm</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Sitemap</a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+                    © 2025 IBA REAL ESTATE. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+      <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Property filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const propertyCards = document.querySelectorAll('.property-card');
+        const propertyGrid = document.getElementById('property-grid');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+
+                const filterType = this.getAttribute('data-filter');
+
+                // Show/hide properties based on filter
+                propertyCards.forEach(card => {
+                    const cardType = card.getAttribute('data-type');
+                    if (filterType === 'all' || cardType === filterType) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        
+                        // Animate in
+                        setTimeout(() => {
+                            card.style.transition = 'all 0.3s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Update pagination or results count (placeholder)
+                updateResultsCount(filterType);
+            });
+        });
+
+        // Function to update results count (dynamic in real app)
+        function updateResultsCount(filterType) {
+            let count = 0;
+            propertyCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                if (filterType === 'all' || cardType === filterType) {
+                    count++;
+                }
+            });
+            console.log(`Showing ${count} properties for filter: ${filterType}`);
+            // In real app, update a UI element like: document.getElementById('results-count').textContent = `${count} properties found`;
+        }
+
+        // Search form functionality (basic client-side filter; integrate with backend for full search)
+        const searchButton = document.querySelector('button[type="submit"]');
+        if (searchButton) {
+            searchButton.addEventListener('click', function() {
+                
+                
+                const location = document.getElementById('location').value.toLowerCase();
+                const propertyType = document.getElementById('property-type').value.toLowerCase();
+                const minPrice = document.getElementById('min-price').value;
+                const maxPrice = document.getElementById('max-price').value;
+
+                let visibleCount = 0;
+
+                propertyCards.forEach(card => {
+                    const cardLocation = card.querySelector('.property-address') ? card.querySelector('.property-address').textContent.toLowerCase() : '';
+                    const cardType = card.getAttribute('data-type');
+                    const cardPriceText = card.querySelector('.text-xl').textContent.replace(/[^\d,]/g, '').replace(/,/g, '');
+                    const cardPrice = parseInt(cardPriceText) || 0;
+
+                    let matches = true;
+
+                    if (location && !cardLocation.includes(location)) matches = false;
+                    if (propertyType && propertyType !== '' && !propertyType.includes(cardType)) matches = false;
+                    if (minPrice && minPrice !== '' && cardPrice < parseInt(minPrice.replace(/[^\d]/g, ''))) matches = false;
+                    if (maxPrice && maxPrice !== '' && cardPrice > parseInt(maxPrice.replace(/[^\d]/g, ''))) matches = false;
+
+                    if (matches) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Scroll to properties section
+                document.getElementById('properties').scrollIntoView({ behavior: 'smooth' });
+
+                // Show toast or alert for results
+                alert(`${visibleCount} properties match your search criteria. Scroll down to view them.`);
+                
+                // In real app, redirect to filtered results page or update URL params
+            });
+        }
+
+        // Pagination functionality (basic; integrate with backend for dynamic pages)
+        const prevBtn = document.querySelector('#property-grid ~ .flex button:first-child');
+        const nextBtn = document.querySelector('#property-grid ~ .flex button:last-child');
+        let currentPage = 1;
+        const totalPages = 5; // Placeholder
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadPage(currentPage);
+                    this.disabled = currentPage === 1;
+                    nextBtn.disabled = false;
+                }
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadPage(currentPage);
+                    this.disabled = currentPage === totalPages;
+                    prevBtn.disabled = false;
+                }
+            });
+        }
+
+        // Placeholder for loading page (in real app, fetch from API)
+        function loadPage(page) {
+            console.log(`Loading page ${page}`);
+            // Update page indicator
+            document.querySelector('#property-grid ~ .flex span').textContent = `Page ${page} of ${totalPages}`;
+            // Animate or reload properties for that page
+        }
+
+        // Initialize: Set initial results count
+        updateResultsCount('all');
+
+        // Lazy loading for images (enhance performance)
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        
+        // Services Dropdown Toggle Functionality
+        (function() {
+            const serviceToggle = document.getElementById('service-toggle');
+            const serviceMenu = document.getElementById('service-menu');
+            const dropdownIcon = serviceToggle.querySelector('.dropdown-icon');
+
+    if (serviceToggle && serviceMenu) {
+        // Toggle dropdown on button click
+        serviceToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling to document click handler
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            // Update ARIA attribute
+            this.setAttribute('aria-expanded', !isExpanded);
+            
+            // Toggle menu visibility
+            serviceMenu.classList.toggle('show');
+            
+            // Rotate icon
+            if (dropdownIcon) {
+                dropdownIcon.classList.toggle('rotated');
+            }
+        });
+
+        // Close dropdown when clicking on a menu item (optional: for better UX)
+        const menuItems = serviceMenu.querySelectorAll('[role="menuitem"]');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                serviceToggle.setAttribute('aria-expanded', 'false');
+                serviceMenu.classList.remove('show');
+                if (dropdownIcon) {
+                    dropdownIcon.classList.remove('rotated');
+                }
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!serviceToggle.contains(e.target) && !serviceMenu.contains(e.target)) {
+                serviceToggle.setAttribute('aria-expanded', 'false');
+                serviceMenu.classList.remove('show');
+                if (dropdownIcon) {
+                    dropdownIcon.classList.remove('rotated');
+                }
+            }
+        });
+
+        // Keyboard navigation support (close on Escape key)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && serviceMenu.classList.contains('show')) {
+                serviceToggle.setAttribute('aria-expanded', 'false');
+                serviceMenu.classList.remove('show');
+                if (dropdownIcon) {
+                    dropdownIcon.classList.remove('rotated');
+                }
+                serviceToggle.focus(); // Return focus to toggle button
+            }
+        });
+
+        // Focus management: Close if focus leaves the dropdown
+        serviceMenu.addEventListener('focusout', function(e) {
+            if (!serviceToggle.contains(e.relatedTarget) && !serviceMenu.contains(e.relatedTarget)) {
+                setTimeout(() => {
+                    if (!serviceMenu.contains(document.activeElement)) {
+                        serviceToggle.setAttribute('aria-expanded', 'false');
+                        serviceMenu.classList.remove('show');
+                        if (dropdownIcon) {
+                            dropdownIcon.classList.remove('rotated');
+                        }
+                    }
+                }, 100);
+            }
+        });
+    }
+})();
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const loginButton = document.querySelector('a[href="login"] button');
+  
+  // Check login status from server
+  fetch('/api/check-login')
+    .then(res => res.json())
+    .then(data => {
+      if (data.loggedIn) {
+        // Remove login button if logged in
+        if (loginButton) {
+          loginButton.remove();
+        }
+      }
+    });
+
+  // Add event listener to all buttons that require login
+  // For demo, let's say all buttons with class 'requires-login' need login
+  document.querySelectorAll('button.requires-login').forEach(button => {
+    button.addEventListener('click', () => {
+   
+      fetch('/api/check-login')
+        .then(res => res.json())
+        .then(data => {
+          if (!data.loggedIn) {
+            // Redirect to login page if not logged in
+            window.location.href = '/login.html';
+          } else {
+            // Proceed with button action or form submission
+            // For demo, just alert or you can trigger the original action
+            alert('You are logged in, action allowed.');
+          }
+        });
+    });
+  });
+});
+      
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+   
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    
+    try {
+        const response = await fetch('/contact', { // Adjust endpoint if needed
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('Message sent successfully!'); // Or show a success message/div
+            this.reset(); // Clear form
+        } else {
+            alert(result.error || 'Something went wrong.'); // Or show error message
+        }
+    } catch (error) {
+        console.error('Submission error:', error);
+        alert('Network error. Please try again.');
+    }
+});
+    </script>
+</body>
+</html>

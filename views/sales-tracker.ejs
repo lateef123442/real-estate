@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBA Real Estate | Sales Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+   /* ---------- Simple, professional styling ---------- */
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #0f766e;
+    --accent-2: #2563eb;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --glass: rgba(15, 118, 110, 0.06);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg) 0%, #eef2ff 100%);
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 24px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+p.lead {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+input.search {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: white;
+    min-width: 220px;
+    flex: 1; /* Allow input to grow */
+    box-shadow: 0 4px 10px rgba(16, 24, 40, 0.04);
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.card .value {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.small {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.table-wrap {
+    background: transparent;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+thead {
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.06), rgba(15, 118, 110, 0.04));
+    color: var(--muted);
+}
+
+th, td {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+th {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge.lead {
+    background: var(--glass);
+    color: var(--accent);
+}
+
+.badge.active {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--accent-2);
+}
+
+.badge.closed {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--success);
+}
+
+.badge.lost {
+    background: rgba(220, 38, 38, 0.08);
+    color: var(--danger);
+}
+
+.progress {
+    height: 8px;
+    background: #eef2ff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress > i {
+    display: block;
+    height: 8px;
+    border-radius: 6px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.actions button {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: white;
+    cursor: pointer;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    input.search {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .brand h1 {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%; /* Full width for buttons on small screens */
+    }
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.status-active {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-sold {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.status-contract {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+#progressBar {
+    transition: width 0.5s ease;
+}
+
+.chart-container {
+    height: 300px;
+}
+
+    </style>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <div id="app" role="application">
+        <aside class="sidebar" aria-label="Main navigation">
+            <nav aria-label="Primary navigation">
+                <a href="index.html" class="active" tabindex="0" aria-current="page" aria-label="Home">
+                    <span class="material-icons" aria-hidden="true">home</span>Home
+                </a>
+                <a href="buy-page.html" tabindex="0" aria-label="Buy Homes">
+                    <span class="material-icons" aria-hidden="true">support_agent</span>Buy
+                </a>
+                <a href="rent-page.html" tabindex="0" aria-label="Rent Homes">
+                    <span class="material-icons" aria-hidden="true">key</span>Rent
+                </a>
+                <a href="sell-page.html" tabindex="0" aria-label="Sell Homes">
+                    <span class="material-icons" aria-hidden="true">sell</span>Sell
+                </a>
+                <a href="home-improvement-page.html" tabindex="0" aria-label="Home Improvement">
+                    <span class="material-icons" aria-hidden="true">home_repair_service</span>Home Improvement
+                </a>
+                <a href="message-page.html" tabindex="0" aria-label="Messages">
+                    <span class="material-icons" aria-hidden="true">message</span>Messages
+                </a>
+                <a href="setting-page.html" tabindex="0" aria-label="Settings">
+                    <span class="material-icons" aria-hidden="true">settings</span>Settings
+                </a>
+                <div class="admin-dropdown">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="admin-menu">
+                        <span class="material-icons" aria-hidden="true">admin_panel_settings</span>Admin
+                        <span class="material-icons dropdown-icon">expand_more</span>
+                    </button>
+                    <div class="dropdown-menu" id="admin-menu">
+                        <a href="sales-approval.html" tabindex="0" aria-label="Sales Approval">
+                            <span class="material-icons" aria-hidden="true">check_circle</span>Sales Approval
+                        </a>
+                        <a href="tour-requested.html" tabindex="0" aria-label="Tour Requested">
+                            <span class="material-icons" aria-hidden="true">event_available</span>Tour Requested
+                        </a>
+                        <a href="view-customers.html" tabindex="0" aria-label="View All Customers">
+                            <span class="material-icons" aria-hidden="true">people</span>View All Customers
+                        </a>
+                
+                        <a href="track-sales.html" tabindex="0" aria-label="Track Sales">
+                            <span class="material-icons" aria-hidden="true">assessment</span>Track Sales
+                        </a>
+               
+                    </div>
+                </div>
+            </nav>
+            <footer>
+                &copy; 2025 IBA Real Estate. All rights reserved.
+            </footer>
+        </aside>
+
+        <header role="banner" aria-label="Primary header">
+            <div class="header-left">
+                <button class="sidebar-toggle-btn material-icons" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">menu</button>
+                <a href="#" class="logo" aria-label="RealEstatePro Home">
+                    <span class="material-icons" aria-hidden="true">apartment</span>IBA Real Estate And Consultant
+                </a>
+                <nav class="primary-nav" role="navigation" aria-label="Primary site navigation">
+                    <a href="buy-page.html" class="active" aria-current="page">Buy</a>
+                    <a href="rent-page.html">Rent</a>
+                    <a href="sell-page.html">Sell</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+                    <a href="notification-page.html"><span class="material-icons">notifications</span></a>
+                </button>
+                <button class="icon-btn" aria-label="User  profile menu" aria-haspopup="true" aria-expanded="false">
+                    <a href="profile-page.html"><span class="material-icons">person</span></a>
+                </button>
+            </div>
+        </header>
+
+        <div class="container">
+            <header>
+                <div class="brand">
+                    <div class="logo">RE</div>
+                    <div>
+                        <h1>Horizon Properties — Sales Tracker</h1>
+                        <p class="lead">Overview of leads, active deals, and performance</p>
+                    </div>
+                </div>
+                <div class="controls">
+                    <input class="search" id="search" placeholder="Search by client, property or city..." />
+                    <button class="btn" id="addBtn">+ New Lead</button>
+                </div>
+            </header>
+
+            <section class="stats">
+                <div class="card">
+                    <h3>Total Leads</h3>
+                    <div class="value" id="totalLeads">128</div>
+                    <div class="small">Since Jan 1, 2025</div>
+                </div>
+                <div class="card">
+                    <h3>Active Deals</h3>
+                    <div class="value" id="activeDeals">24</div>
+                    <div class="small">Currently in negotiation</div>
+                </div>
+                <div class="card">
+                    <h3>Closed Deals</h3>
+                    <div class="value" id="closedDeals">82</div>
+                    <div class="small">YTD closed</div>
+                </div>
+                <div class="card">
+                    <h3>Conversion Rate</h3>
+                    <div class="value" id="conversion">64%</div>
+                    <div class="small">Closed ÷ Total Leads</div>
+                </div>
+            </section>
+
+            <section class="table-wrap">
+                <table id="dataTable" aria-label="Sales tracker table">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Property</th>
+                            <th>City</th>
+                            <th>Value</th>
+                            <th>Stage</th>
+                            <th>Progress</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Olivia Martins</td>
+                            <td>3BHK Riverside</td>
+                            <td>Lagos</td>
+                            <td>₦45,000,000</td>
+                            <td><span class="badge active">Negotiation</span></td>
+                            <td>
+                                <div class="progress" title="60%">
+                                    <i style="width:60%;background:linear-gradient(90deg,var(--accent-2),var(--accent));"></i>
+                                </div>
+                            </td>
+                            <td class="actions"><button>View</button><button>Contact</button></td>
+                        </tr>
+                        <tr>
+                            <td>Chinedu Okafor</td>
+                            <td>2BHK Garden View</td>
+                            <td>Abuja</td>
+                            <td>₦28,500,000</td>
+                            <td><span class="badge closed">Closed</span></td>
+                            <td>
+                                <div class="progress" title="100%">
+                                    <i style="width:100%;background:linear-gradient(90deg,var(--success),#059669);"></i>
+                                </div>
+                            </td>
+                            <td class="actions"><button>Receipt</button><button>Archive</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sylvia A.</td>
+                            <td>Land — Plot 5</td>
+                            <td>Ibadan</td>
+                            <td>₦12,000,000</td>
+                            <td><span class="badge lead">New Lead</span></td>
+                            <td>
+                                <div class="progress" title="12%">
+                                    <i style="width:12%;background:linear-gradient(90deg,var(--accent),#06b6d4);"></i>
+                                </div>
+                            </td>
+                            <td class="actions"><button>Qualify</button><button>Call</button></td>
+                        </tr>
+                        <tr>
+                            <td>Paul N.</td>
+                            <td>Penthouse Suite</td>
+                            <td>Port Harcourt</td>
+                            <td>₦120,000,000</td>
+                            <td><span class="badge lost">Lost</span></td>
+                            <td>
+                                <div class="progress" title="0%">
+                                    <i style="width:0%;background:linear-gradient(90deg,var(--danger),#ef4444);"></i>
+                                </div>
+                            </td>
+                            <td class="actions"><button>Review</button><button>Reason</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <footer class="bg-gray-800 text-white p-6 mt-8">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">IBA Real Estate</h4>
+                        <p class="text-gray-400">Leading real estate services since 2023.</p>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Properties</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Agents</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Market Reports</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                        <address class="not-italic text-gray-400">
+                            <p><i class="fas fa-map-marker-alt mr-2"></i> 123 Real Estate Ave, Suite 500</p>
+                            <p class="my-2"><i class="fas fa-phone-alt mr-2"></i> (555) 123-4567</p>
+                            <p><i class="fas fa-envelope mr-2"></i> info@ibarealestate.com</p>
+                        </address>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                    <p>&copy; 2023 IBA Real Estate. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Interactive elements functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Property card hover effects
+            const propertyCards = document.querySelectorAll('.property-card');
+            propertyCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Simulate progress bar animation
+            const progressBar = document.querySelector('#progressBar');
+            function animateProgressBar() {
+                let width = 0;
+                const interval = setInterval(function() {
+                    if (width >= 70) {
+                        clearInterval(interval);
+                    } else {
+                        width++;
+                        progressBar.style.width = width + '%';
+                    }
+                }, 10);
+            }
+            animateProgressBar();
+
+            // Dropdown functionality
+            document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !expanded);
+                document.getElementById('admin-menu').classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
