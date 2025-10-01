@@ -114,3 +114,20 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=12
 ;
+
+
+
+
+
+
+
+
+//create a .env file where the newapp.js is and paste:
+DB_HOST=127.0.0.1
+DB_DATABASE=iba_real_estate
+DB_USER=root
+DB_PASSWORD=mcbaysel
+DB_MULTIPLE_STATEMENTS=true
+DB_PORT=3306
+DB_QUEUE_LIMIT=30
+DB_ACQUIRE_TIMEOUT=10000000
